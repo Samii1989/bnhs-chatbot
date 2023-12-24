@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BNHS Chatbot</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #282c34; /* Dark gray background */
+            color: white;
+        }
+
+        header {
+            background-color: #222; /* Darker gray header */
+            padding: 15px;
+            text-align: center;
+            color: white;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #chatbox {
+            width: 100%;
+            max-width: 600px;
+            border: 1px solid #555; /* Dark gray border */
+            border-radius: 10px;
+            overflow-y: scroll;
+            max-height: 400px;
+            margin-bottom: 20px;
+            background-color: #333; /* Dark gray chatbox background */
+        }
+
+        .message {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            max-width: 80%;
+        }
+
+        .user-message {
+            background-color: #4CAF50; /* Green for user messages */
+            color: white;
+            float: right;
+        }
+
+        .bot-message {
+            background-color: #555; /* Dark gray for bot messages */
+            color: #ddd; /* Light gray text for bot messages */
+            float: left;
+        }
+
+        #userInput {
+            width: calc(100% - 20px);
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #555; /* Dark gray border */
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #333; /* Dark gray text for input */
+        }
+
+        #sendButton {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: #4CAF50; /* Green for send button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        footer {
+            background-color: #222; /* Darker gray footer */
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BNHS Chatbot</h1>
+    </header>
+
+    <section>
+        <div id="chatbox"></div>
+        <input type="text" id="userInput" placeholder="Type your command...">
+        <button id="sendButton" onclick="sendMessage()">Send</button>
+    </section>
+
+    <footer>
+        &copy; 2023 BNHS Chatbot
+    </footer>
+
+    <script>
+        function sendMessage() {
+            var userInput = document.getElementById("userInput").value;
+            var chatbox = document.getElementById("chatbox");
+
+            // Display user message
+            chatbox.innerHTML += "<div class='message user-message'>" + userInput + "</div>";
+
+            // Process user input and generate chatbot response
+            var response = getChatbotResponse(userInput);
+            
+            // Display chatbot response
+            chatbox.innerHTML += "<div class='message bot-message'>" + response + "</div>";
+
+            // Clear user input
+            document.getElementById("userInput").value = "";
+
+            // Scroll to the bottom of the chatbox
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        function getChatbotResponse(userInput) {
+            // Convert user input to lowercase for case-insensitive matching
+            var lowerCaseInput = userInput.toLowerCase();
+
+            // Check for specific commands and provide corresponding responses
+            if (lowerCaseInput.includes("science 10")) {
+                // Replace this link with the actual Google Drive link to your PDF file
+                var pdfLink = "<a href='https://drive.google.com/file/d/1egtm5-AEbD8u-9taRg2xcIxwRNadMfOu/view?usp=drivesdk' target='_blank'>Download PDF</a>";
+                return "Here is the PDF file for Science 10 book. " + pdfLink;
+            } else {
+                // Default response for unrecognized commands
+                return "I'm sorry, I didn't understand that command.";
+            }
+        }
+    </script>
+</body>
+</html>
